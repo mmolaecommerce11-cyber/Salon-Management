@@ -1,0 +1,55 @@
+﻿@page
+@model Salon_Management_System.Pages.Bookings.MyBookingsModel
+
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h1 class="mb-4">My Bookings</h1>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-6">
+        <input type="email"
+               name="Email"
+               value="@Model.Email"
+               class="form-control"
+               placeholder="Enter your email address"
+               required />
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">
+            View Bookings
+        </button>
+    </div>
+</form>
+
+@if (!Model.Bookings.Any() && !string.IsNullOrWhiteSpace(Model.Email))
+{
+    <p>No bookings found for this email address.</p>
+}
+
+@if (Model.Bookings.Any())
+{
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Service</th>
+                <th>Barber</th>
+                <th>Date & Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr>
+                    <td>@booking.SalonService?.Name</td>
+                    <td>@booking.Barber?.FullName</td>
+                    <td>@booking.AppointmentDate</td>
+                    <td>@booking.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

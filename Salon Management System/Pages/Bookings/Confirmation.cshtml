@@ -1,0 +1,44 @@
+﻿@page
+@model Salon_Management_System.Pages.Bookings.ConfirmationModel
+
+@{
+    ViewData["Title"] = "Booking Confirmed";
+}
+
+<div class="text-center mt-5">
+    <h1 class="text-success mb-3">✔ Booking Confirmed</h1>
+    <p class="lead">Thank you for your booking. We look forward to seeing you!</p>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="mb-3">Appointment Details</h5>
+
+        <p>
+            <strong>Service:</strong> @Model.Service.Name <br />
+            <strong>Category:</strong> @Model.Service.Category <br />
+            <strong>Duration:</strong> @Model.Service.DurationMinutes min <br />
+            <strong>Price:</strong> R @Model.Service.Price
+        </p>
+
+        <hr />
+
+        <p>
+            <strong>Barber:</strong> @Model.Barber.FullName <br />
+            <strong>Date & Time:</strong> @Model.Booking.AppointmentDate
+        </p>
+
+        <hr />
+
+        <p>
+            <strong>Booking Reference:</strong> #@Model.Booking.Id <br />
+            <strong>Status:</strong> Confirmed
+        </p>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-page="/Index" class="btn btn-outline-primary">
+        Back to Home
+    </a>
+</div>
