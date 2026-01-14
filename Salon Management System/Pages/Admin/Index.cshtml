@@ -1,0 +1,62 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.IndexModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Total Bookings</h5>
+                <h2>@Model.TotalBookings</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Pending Payments</h5>
+                <h2>@Model.PendingPayments</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Active Services</h5>
+                <h2>@Model.ActiveServices</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Active Barbers</h5>
+                <h2>@Model.ActiveBarbers</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h4>Management</h4>
+
+<ul>
+    <li>
+        <a asp-page="/Admin/Services/Index">Manage Services</a>
+    </li>
+    <li>
+        <a asp-page="/Admin/Barbers/Index">Manage Barbers</a>
+    </li>
+    <li>
+        <a asp-page="/Admin/Bookings/Index">Manage Bookings</a>
+    </li>
+</ul>
