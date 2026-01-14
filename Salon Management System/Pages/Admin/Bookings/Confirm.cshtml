@@ -1,0 +1,25 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.Bookings.ConfirmModel
+
+@{
+    ViewData["Title"] = "Confirm Booking";
+}
+
+<h1>Confirm Booking</h1>
+
+<p>Are you sure you want to confirm this booking?</p>
+
+<div>
+    <h3>@Model.Booking.SalonService.Name</h3>
+    <p>Barber: @Model.Booking.Barber.FullName</p>
+    <p>Customer: @Model.Booking.CustomerName</p>
+    <p>Email: @Model.Booking.CustomerEmail</p>
+    <p>Phone: @Model.Booking.CustomerPhone</p>
+    <p>Appointment Date: @Model.Booking.AppointmentDate</p>
+    <p>Status: @Model.Booking.Status</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-success">Confirm Booking</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

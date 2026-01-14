@@ -1,0 +1,20 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.Bookings.DetailsModel
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<h1>Booking Details</h1>
+
+<div>
+    <h3>@Model.Booking.SalonService.Name</h3>
+    <p>Barber: @Model.Booking.Barber.FullName</p>
+    <p>Customer: @Model.Booking.CustomerName</p>
+    <p>Email: @Model.Booking.CustomerEmail</p>
+    <p>Phone: @Model.Booking.CustomerPhone</p>
+    <p>Appointment Date: @Model.Booking.AppointmentDate</p>
+    <p>Status: @Model.Booking.Status</p>
+</div>
+
+<a asp-page="Index" class="btn btn-secondary">Back to Bookings</a>

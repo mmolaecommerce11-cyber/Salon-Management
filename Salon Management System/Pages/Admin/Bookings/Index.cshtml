@@ -1,0 +1,38 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.Bookings.IndexModel
+
+@{
+    ViewData["Title"] = "Manage Bookings";
+}
+
+<h1 class="mb-4">Manage Bookings</h1>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Service</th>
+            <th>Barber</th>
+            <th>Customer</th>
+            <th>Appointment Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model.Bookings)
+        {
+            <tr>
+                <td>@booking.SalonService.Name</td>
+                <td>@booking.Barber.FullName</td>
+                <td>@booking.CustomerName</td>
+                <td>@booking.AppointmentDate</td>
+                <td>@booking.Status</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@booking.Id" class="btn btn-sm btn-info">View</a>
+                    <a asp-page="Confirm" asp-route-id="@booking.Id" class="btn btn-sm btn-success">Confirm</a>
+                    <a asp-page="Cancel" asp-route-id="@booking.Id" class="btn btn-sm btn-danger">Cancel</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
