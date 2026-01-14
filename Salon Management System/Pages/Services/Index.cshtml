@@ -1,4 +1,73 @@
 ﻿@page
 @model Salon_Management_System.Pages.Services.IndexModel
+
 @{
+    ViewData["Title"] = "Explore Services";
 }
+
+<h1 class="mb-4">Explore Our Services</h1>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="text"
+               name="Search"
+               value="@Model.Search"
+               class="form-control"
+               placeholder="Search service..." />
+    </div>
+
+    <div class="col-md-3">
+        <select name="Category" class="form-select">
+            <option value="">All Categories</option>
+            <option value="Men" selected="@(Model.Category == "Men")">Men</option>
+            <option value="Women" selected="@(Model.Category == "Women")">Women</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">
+            Filter
+        </button>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Service</th>
+            <th>Category</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Services.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center">
+                    No services found.
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var service in Model.Services)
+            {
+                <tr>
+                    <td>@service.Name</td>
+                    <td>@service.Category</td>
+                    <td>@service.DurationMinutes min</td>
+                    <td>R @service.Price</td>
+                    <td>
+                        <a class="btn btn-sm btn-success"
+                           asp-page="/Bookings/Create"
+                           asp-route-serviceId="@service.Id">
+                            Book
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
