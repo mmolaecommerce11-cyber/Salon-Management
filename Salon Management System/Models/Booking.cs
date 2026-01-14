@@ -1,19 +1,19 @@
-﻿public class Booking
+﻿namespace Salon_Management_System.Models;
+
+public class Booking
 {
     public int Id { get; set; }
 
-    public string CustomerId { get; set; }
+    public int SalonServiceId { get; set; }
+    public SalonService SalonService { get; set; } = null!;
+
     public int BarberId { get; set; }
-    public int StyleId { get; set; }
+    public Barber Barber { get; set; } = null!;
 
-    public DateTime AppointmentTime { get; set; }
+    public DateTime AppointmentDate { get; set; }
+
+    public string CustomerName { get; set; } = null!;
+    public string CustomerEmail { get; set; } = null!;
+
     public BookingStatus Status { get; set; }
-
-    public decimal Price { get; set; }
-}
-public enum BookingStatus
-{
-    Pending,
-    Paid,
-    Cancelled
 }
