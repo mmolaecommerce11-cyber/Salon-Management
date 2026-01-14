@@ -1,0 +1,35 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.Barbers.CreateModel
+
+@{
+    ViewData["Title"] = "Add Barber";
+}
+
+<h1>Add New Barber</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="Barber.FullName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Barber.Email" type="email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input asp-for="Barber.Phone" type="tel" class="form-control" required />
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="Barber.IsActive" class="form-check-input" />
+        <label class="form-check-label">Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Save
+    </button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

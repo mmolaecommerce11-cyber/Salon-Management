@@ -1,10 +1,26 @@
-﻿namespace Salon_Management_System.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class Barber
+namespace Salon_Management_System.Models
 {
-    public int Id { get; set; }
-    public string FullName { get; set; } = null!;
-    public bool IsActive { get; set; }
+    public class Barber
+    {
+        public int Id { get; set; }
 
-    public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        [Required]
+        [StringLength(100)]
+        public string FullName { get; set; } = null!;
+
+        [EmailAddress]
+        [StringLength(100)]
+        public string? Email { get; set; }  // optional if you want
+
+        [Phone]
+        [StringLength(20)]
+        public string? Phone { get; set; }  // optional if you want
+
+        public bool IsActive { get; set; } = true;
+
+        // Optional: navigation properties
+        // public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+    }
 }

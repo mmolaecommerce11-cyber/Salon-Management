@@ -1,0 +1,37 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.Barbers.EditModel
+
+@{
+    ViewData["Title"] = "Edit Barber";
+}
+
+<h1>Edit Barber</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Barber.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="Barber.FullName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Barber.Email" type="email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input asp-for="Barber.Phone" type="tel" class="form-control" required />
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="Barber.IsActive" class="form-check-input" />
+        <label class="form-check-label">Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Update
+    </button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
