@@ -26,8 +26,10 @@ public class CreateModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int serviceId)
     {
+#pragma warning disable CS8601 // Possible null reference assignment.
         Service = await _context.SalonServices
             .FirstOrDefaultAsync(s => s.Id == serviceId && s.IsActive);
+#pragma warning restore CS8601 // Possible null reference assignment.
 
         if (Service == null)
             return NotFound();
@@ -35,6 +37,10 @@ public class CreateModel : PageModel
         Barbers = await _context.Barbers
             .Where(b => b.IsActive)
             .ToListAsync();
+        if (Barbers == null)
+        {
+            return NotFound();
+        }
 
         Input.SalonServiceId = serviceId;
         Input.AppointmentDate = DateTime.Today.AddDays(1);

@@ -1,4 +1,31 @@
 ﻿@page
 @model Salon_Management_System.Pages.Payments.CheckoutModel
+
 @{
+    ViewData["Title"] = "Checkout";
 }
+
+<h1 class="mb-4">Checkout</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5>Booking Summary</h5>
+
+        <p>
+            <strong>Service:</strong> @Model.Service.Name <br />
+            <strong>Duration:</strong> @Model.Service.DurationMinutes min <br />
+            <strong>Price:</strong> R @Model.Service.Price <br />
+            <strong>Appointment:</strong> @Model.Booking.AppointmentDate
+        </p>
+    </div>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary btn-lg">
+        Pay Now
+    </button>
+</form>
+
+<p class="text-muted mt-3">
+    * Payment gateway integration will be added later.
+</p>
