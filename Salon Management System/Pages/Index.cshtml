@@ -1,9 +1,17 @@
 ﻿@page
 @model IndexModel
+@{
+    ViewData["Title"] = "Welcome";
+}
 
-<div class="text-center">
-    <h1>Welcome to Our Barbershop</h1>
-    <a class="btn btn-primary btn-lg" asp-page="/Styles/Index">
-        Explore Styles
-    </a>
+<div class="welcome-hero">
+    <div class="welcome-overlay">
+        <h1 class="display-4 fw-bold">Welcome to Our Salon</h1>
+        <p class="lead">Explore styles. Book your look. Look your best.</p>
+
+        <a asp-page="/Services/Index"
+           class="btn btn-lg btn-primary mt-3">
+            Explore Services
+        </a>
+    </div>
 </div>

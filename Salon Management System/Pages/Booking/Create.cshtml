@@ -1,4 +1,56 @@
 ﻿@page
-@model Salon_Management_System.Pages.Booking.CreateModel
+@model Salon_Management_System.Pages.Bookings.CreateModel
+
 @{
+    ViewData["Title"] = "Book Appointment";
 }
+
+<h1 class="mb-4">Book Appointment</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5>@Model.Service.Name</h5>
+        <p>
+            Category: @Model.Service.Category <br />
+            Duration: @Model.Service.DurationMinutes min <br />
+            Price: R @Model.Service.Price
+        </p>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Input.SalonServiceId" />
+
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="Input.CustomerName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Input.CustomerEmail" type="email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Appointment Date & Time</label>
+        <input asp-for="Input.AppointmentDate"
+               type="datetime-local"
+               class="form-control"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Preferred Barber (Optional)</label>
+        <select asp-for="Input.BarberId" class="form-select">
+            <option value="">Auto-assign</option>
+            @foreach (var barber in Model.Barbers)
+            {
+                <option value="@barber.Id">@barber.FullName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Continue to Payment
+    </button>
+</form>
