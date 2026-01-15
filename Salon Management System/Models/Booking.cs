@@ -14,6 +14,7 @@ public class Booking
 
     public string CustomerName { get; set; } = null!;
     public string CustomerEmail { get; set; } = null!;
-    public string CustomerPhone { get; set; }
+    public string CustomerPhone { get; set; } = null!;   // ✅ REQUIRED
+
     public BookingStatus Status { get; set; }
 }
