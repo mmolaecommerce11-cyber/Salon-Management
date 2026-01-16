@@ -4,46 +4,47 @@ using Microsoft.EntityFrameworkCore;
 using Salon_Management_System.Data;
 using Salon_Management_System.Models;
 
-namespace Salon_Management_System.Pages.Admin.Bookings;
-
-public class CancelModel : PageModel
+namespace Salon_Management_System.Pages.Admin.Bookings
 {
-    private readonly ApplicationDbContext _context;
-
-    public CancelModel(ApplicationDbContext context)
+    public class CancelModel : PageModel
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    [BindProperty]
-    public Booking Booking { get; set; } = null!;
-
-    public async Task<IActionResult> OnGetAsync(int id)
-    {
-        Booking = await _context.Bookings
-            .FirstOrDefaultAsync(b => b.Id == id);
-
-        if (Booking == null)
+        public CancelModel(ApplicationDbContext context)
         {
-            return NotFound();
+            _context = context;
         }
 
-        return Page();
-    }
+        public Booking Booking { get; private set; } = null!;
 
-    public async Task<IActionResult> OnPostAsync()
-    {
-        if (Booking == null)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            return NotFound();
+            Booking = await _context.Bookings
+                .Include(b => b.SalonService)
+                .Include(b => b.Barber)
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            if (Booking == null)
+            {
+                return NotFound();
+            }
+
+            return Page();
         }
 
-        // Update the status to Canceled
-        Booking.Status = BookingStatus.Canceled;
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            var booking = await _context.Bookings.FindAsync(id);
 
-        _context.Bookings.Update(Booking);
-        await _context.SaveChangesAsync();
+            if (booking == null)
+            {
+                return NotFound();
+            }
 
-        return RedirectToPage("Index");
+            booking.Status = BookingStatus.Cancelled;
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("Index");
+        }
     }
 }

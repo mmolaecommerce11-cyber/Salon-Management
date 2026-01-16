@@ -1,48 +1,95 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿/* =========================================================
+   LAYOUT-ONLY STYLES (_Layout.cshtml.css)
+   ========================================================= */
 
+/* ---------------------------------------------------------
+   BRAND
+   --------------------------------------------------------- */
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #ffffff !important;
 }
 
+/* ---------------------------------------------------------
+   NAVBAR
+   --------------------------------------------------------- */
+.navbar {
+    background-color: #31326F;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+    .navbar .nav-link {
+        color: #e5e7eb !important;
+        font-weight: 500;
+    }
+
+        .navbar .nav-link:hover {
+            color: #A8FBD3 !important;
+        }
+
+/* ---------------------------------------------------------
+   LAYOUT LINKS (HEADER / FOOTER)
+   --------------------------------------------------------- */
 a {
-  color: #0077cc;
+    color: #637AB9;
 }
 
+    a:hover {
+        color: #31326F;
+    }
+
+/* ---------------------------------------------------------
+   PRIMARY BUTTON (LAYOUT CONTEXT ONLY)
+   --------------------------------------------------------- */
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    background-color: #4FB7B3;
+    border-color: #4FB7B3;
+    color: #ffffff;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    .btn-primary:hover {
+        background-color: #3fa6a2;
+        border-color: #3fa6a2;
+    }
+
+/* ---------------------------------------------------------
+   NAV PILLS (TOP-LEVEL NAV)
+   --------------------------------------------------------- */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: #4FB7B3;
+    border-color: #4FB7B3;
+    color: #ffffff;
 }
 
+/* ---------------------------------------------------------
+   BORDERS
+   --------------------------------------------------------- */
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e7eb;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e7eb;
 }
 
+/* ---------------------------------------------------------
+   SHADOW UTIL
+   --------------------------------------------------------- */
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
+/* ---------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------- */
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+    line-height: 60px;
+    width: 100%;
 }
