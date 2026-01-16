@@ -1,0 +1,38 @@
+﻿@page
+@model Salon_Management_System.Pages.Admin.Barbers.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Barber";
+}
+
+<h1 class="mb-3 text-danger">Delete Barber</h1>
+
+<div class="alert alert-warning">
+    This action <strong>cannot be undone</strong>.
+</div>
+
+@if (!ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <div>@error.ErrorMessage</div>
+        }
+    </div>
+}
+
+<div class="mb-4">
+    <h4>@Model.Barber.FullName</h4>
+    <p>Email: @Model.Barber.Email</p>
+    <p>Phone: @Model.Barber.Phone</p>
+    <p>Status: @(Model.Barber.IsActive ? "Active" : "Inactive")</p>
+</div>
+
+<form method="post" asp-route-id="@Model.Barber.Id">
+    <button type="submit" class="btn btn-danger">
+        Yes, Delete Barber
+    </button>
+    <a asp-page="Index" class="btn btn-secondary ms-2">
+        Cancel
+    </a>
+</form>
