@@ -19,7 +19,8 @@
     <p>Status: @Model.Booking.Status</p>
 </div>
 
-<form method="post">
+<form method="post" asp-route-id="@Model.Booking.Id">
+
     <button type="submit" class="btn btn-danger">Cancel Booking</button>
     <a asp-page="Index" class="btn btn-secondary">Back to Bookings</a>
 </form>
