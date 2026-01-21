@@ -2,72 +2,108 @@
 @model Salon_Management_System.Pages.Services.IndexModel
 
 @{
-    ViewData["Title"] = "Explore Services";
+    ViewData["Title"] = "Services";
 }
 
-<h1 class="mb-4">Explore Our Services</h1>
+<div class="container py-5">
 
-<form method="get" class="row g-3 mb-4">
-    <div class="col-md-4">
-        <input type="text"
-               name="Search"
-               value="@Model.Search"
-               class="form-control"
-               placeholder="Search service..." />
+    <!-- Header -->
+    <div class="mb-5">
+        <h1 class="fw-bold display-6">Our Services</h1>
+        <p class="text-muted mt-2">
+            Discover premium salon services tailored for you.
+        </p>
     </div>
 
-    <div class="col-md-3">
-        <select name="Category" class="form-select">
-            <option value="">All Categories</option>
-            <option value="Men" selected="@(Model.Category == "Men")">Men</option>
-            <option value="Women" selected="@(Model.Category == "Women")">Women</option>
-        </select>
+    <!-- Filters -->
+    <div class="card shadow-sm mb-5 border-0">
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label text-muted">Search</label>
+                    <input type="text"
+                           name="Search"
+                           value="@Model.Search"
+                           class="form-control form-control-lg"
+                           placeholder="Search for a service..." />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label text-muted">Category</label>
+                    <select name="Category" class="form-select form-select-lg">
+                        <option value="">All Categories</option>
+                        <option value="Men" selected="@(Model.Category == "Men")">Men</option>
+                        <option value="Women" selected="@(Model.Category == "Women")">Women</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Apply Filters
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-primary w-100">
-            Filter
-        </button>
-    </div>
-</form>
-
-<table class="table table-bordered table-hover">
-    <thead class="table-light">
-        <tr>
-            <th>Service</th>
-            <th>Category</th>
-            <th>Duration</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (!Model.Services.Any())
-        {
-            <tr>
-                <td colspan="5" class="text-center">
-                    No services found.
-                </td>
-            </tr>
-        }
-        else
-        {
-            foreach (var service in Model.Services)
+    <!-- Services -->
+    @if (!Model.Services.Any())
+    {
+        <div class="text-center py-5">
+            <h4 class="fw-semibold mb-2">No services found</h4>
+            <p class="text-muted">
+                Try adjusting your search or filters.
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var service in Model.Services)
             {
-                <tr>
-                    <td>@service.Name</td>
-                    <td>@service.Category</td>
-                    <td>@service.DurationMinutes min</td>
-                    <td>R @service.Price</td>
-                    <td>
-                        <a class="btn btn-sm btn-success"
-                           asp-page="/Bookings/Create"
-                           asp-route-serviceId="@service.Id">
-                            Book
-                        </a>
-                    </td>
-                </tr>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 border-0 shadow-sm service-card">
+                        <div class="card-body d-flex flex-column">
+
+                            <div class="mb-3">
+                                <span class="badge bg-secondary-subtle text-dark">
+                                    @service.Category
+                                </span>
+                            </div>
+
+                            <h5 class="fw-bold mb-2">@service.Name</h5>
+
+                            <p class="text-muted mb-4">
+                                Duration: <strong>@service.DurationMinutes min</strong>
+                            </p>
+
+                            <div class="mt-auto d-flex justify-content-between align-items-center">
+                                <span class="fs-5 fw-bold text-primary">
+                                    R @service.Price
+                                </span>
+
+                                <a class="btn btn-success"
+                                   asp-page="/Bookings/Create"
+                                   asp-route-serviceId="@service.Id">
+                                    Book Now
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             }
+        </div>
+    }
+</div>
+
+<style>
+    .service-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
         }
-    </tbody>
-</table>
+</style>

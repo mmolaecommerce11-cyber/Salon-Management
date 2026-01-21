@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Salon_Management_System.Data;
 
 namespace Salon_Management_System.Pages.Admin;
 
+[Authorize(Roles = "Admin")]
 public class IndexModel : PageModel
 {
     private readonly ApplicationDbContext _context;

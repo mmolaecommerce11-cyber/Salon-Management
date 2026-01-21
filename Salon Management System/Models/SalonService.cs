@@ -8,4 +8,7 @@ public class SalonService
     public decimal Price { get; set; }
     public int DurationMinutes { get; set; }
     public bool IsActive { get; set; }
+
+    // NEW
+    public string? ImagePath { get; set; }
 }
