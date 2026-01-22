@@ -1,56 +1,439 @@
+﻿/* =========================================================
+   DESIGN SYSTEM — PREMIUM SAAS
+   ========================================================= */
+
+:root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --text: #0f172a;
+    --muted: #64748b;
+    --brand: #4FB7B3;
+    --brand-dark: #3fa6a2;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 12px 32px rgba(0,0,0,.12);
+}
+
+/* 🌙 DARK MODE */
+[data-theme="dark"] {
+    --bg: #020617;
+    --surface: #020617;
+    --border: #1e293b;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+}
+
+/* --------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
+/* ---------------------------------------------------------
+   LAYOUT
+   --------------------------------------------------------- */
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-}
-
-/* ===============================
-   Welcome Page Background
-   =============================== */
-
-.welcome-hero {
+.app {
+    display: flex;
     min-height: 100vh;
-    background-image: url('/images/welcome-bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+}
+
+/* CONTENT */
+.main {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+/* ---------------------------------------------------------
+   CARDS
+   --------------------------------------------------------- */
+
+.card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+}
+
+/* ---------------------------------------------------------
+   GRID
+   --------------------------------------------------------- */
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* ---------------------------------------------------------
+   BUTTONS
+   --------------------------------------------------------- */
+
+.btn {
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-brand {
+    background: var(--brand);
+    color: white;
+}
+
+.btn-outline {
+    border: 1px solid var(--border);
+    background: transparent;
+}
+
+/* ---------------------------------------------------------
+   TABLE
+   --------------------------------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 1rem;
+}
+
+td {
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        padding: 1.5rem;
+    }
+}
+/* =========================================================
+   LANDING PAGE
+   ========================================================= */
+
+.landing {
+    min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 3rem 1.5rem;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(79,183,179,0.12), transparent), radial-gradient(800px 400px at 90% 20%, rgba(79,183,179,0.08), transparent);
 }
 
-.welcome-overlay {
-    background: rgba(0, 0, 0, 0.6);
-    color: #ffffff;
-    padding: 3rem;
-    border-radius: 8px;
+.landing-content {
+    max-width: 720px;
     text-align: center;
-    max-width: 700px;
 }
 
+    .landing-content h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.5rem;
+    }
+
+    .landing-content p {
+        font-size: 1.125rem;
+        color: var(--muted);
+        margin-bottom: 2.5rem;
+    }
+
+.landing-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/* =========================================================
+   APP SHELL (SIDEBAR LAYOUT)
+   ========================================================= */
+
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+    .sidebar-nav a:hover {
+        background: var(--bg);
+    }
+
+.sidebar-section {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+/* CONTENT */
+.app-content {
+    flex: 1;
+    padding: 2.5rem;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   MOBILE BEHAVIOR
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .sidebar {
+        display: none;
+    }
+
+    .app-content {
+        padding: 1.5rem;
+    }
+}
+/* =========================================================
+   AUTH PAGES — CENTERED, NO SIDEBAR
+   ========================================================= */
+
+/* Hide sidebar only on auth pages */
+.auth-container ~ * .sidebar,
+.auth-container .sidebar {
+    display: none !important;
+}
+
+/* Expand content to full width */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Remove app-shell layout constraints */
+.auth-container {
+    width: 100%;
+}
+
+/* Center card perfectly */
+.auth-card {
+    margin: auto;
+}
+
+/* Optional: reduce vertical noise */
+.auth-card h1,
+.auth-card h2,
+.auth-card h3 {
+    text-align: center;
+}
+/* =========================================================
+   ADMIN LAYOUT (ISOLATED & SAFE)
+   ========================================================= */
+
+.admin-layout .app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Admin sidebar */
+.admin-layout .sidebar {
+    width: 260px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+    /* Admin links */
+    .admin-layout .sidebar a {
+        text-decoration: none;
+        color: var(--text);
+        padding: 0.65rem 0.9rem;
+        border-radius: var(--radius);
+        font-weight: 500;
+    }
+
+        .admin-layout .sidebar a:hover {
+            background: var(--bg);
+        }
+
+/* Admin content */
+.admin-layout .main {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+/* Prevent auth/mobile rules from touching admin */
+.admin-layout .auth-container {
+    display: none;
+}
+
+/* =========================================================
+   AUTH UI — PREMIUM EXPERIENCE
+   ========================================================= */
+
+/* Fade-in animation */
+@keyframes authFade {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Auth container */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: authFade 0.5s ease-out both;
+    background: var(--bg);
+}
+
+/* Auth card */
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+}
+
+/* Logo */
+.auth-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+    .auth-logo img {
+        height: 48px;
+    }
+
+/* Titles */
+.auth-card h1,
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Inputs */
+.auth-card input {
+    width: 100%;
+    padding: 0.7rem 0.75rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+}
+
+/* Buttons */
+.auth-card button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Links */
+.auth-links {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Password strength meter */
+.password-meter {
+    height: 6px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 0.4rem;
+}
+
+    .password-meter span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: red;
+        transition: width 0.3s ease, background 0.3s ease;
+    }
+
+/* Strength states */
+.password-weak span {
+    background: #ef4444;
+    width: 25%;
+}
+
+.password-medium span {
+    background: #f59e0b;
+    width: 60%;
+}
+
+.password-strong span {
+    background: #22c55e;
+    width: 100%;
+}
+
+/* Dark-mode refinement */
+[data-theme="dark"] .auth-card {
+    box-shadow: 0 12px 40px rgba(0,0,0,.6);
+}

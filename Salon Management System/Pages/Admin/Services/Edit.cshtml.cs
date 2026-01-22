@@ -9,14 +9,19 @@ namespace Salon_Management_System.Pages.Admin.Services;
 public class EditModel : PageModel
 {
     private readonly ApplicationDbContext _context;
+    private readonly IWebHostEnvironment _environment;
+
+    public EditModel(ApplicationDbContext context, IWebHostEnvironment environment)
+    {
+        _context = context;
+        _environment = environment;
+    }
 
     [BindProperty]
     public SalonService Service { get; set; } = null!;
 
-    public EditModel(ApplicationDbContext context)
-    {
-        _context = context;
-    }
+    [BindProperty]
+    public IFormFile? ImageFile { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -33,7 +38,21 @@ public class EditModel : PageModel
         if (!ModelState.IsValid)
             return Page();
 
-        _context.Attach(Service).State = EntityState.Modified;
+        if (ImageFile != null)
+        {
+            string uploadsFolder = Path.Combine(_environment.WebRootPath, "images/services");
+            Directory.CreateDirectory(uploadsFolder);
+
+            string uniqueFileName = Guid.NewGuid() + Path.GetExtension(ImageFile.FileName);
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using var stream = new FileStream(filePath, FileMode.Create);
+            await ImageFile.CopyToAsync(stream);
+
+            Service.ImagePath = "/images/services/" + uniqueFileName;
+        }
+
+        _context.Update(Service);
         await _context.SaveChangesAsync();
 
         return RedirectToPage("Index");

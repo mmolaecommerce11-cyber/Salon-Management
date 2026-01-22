@@ -1,0 +1,115 @@
+﻿@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-container">
+    <div class="auth-card">
+
+        <!-- Brand / Logo -->
+        <div class="auth-logo">
+            <img src="~/images/logo.png" alt="The Salon" />
+        </div>
+
+        <h1>Create Account</h1>
+
+        <form id="registerForm"
+              asp-route-returnUrl="@Model.ReturnUrl"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger"
+                 role="alert"></div>
+
+            <div class="form-group">
+                <input asp-for="Input.Email"
+                       class="form-control"
+                       autocomplete="username"
+                       aria-required="true"
+                       placeholder="Email address" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Input.Password"
+                       id="passwordInput"
+                       class="form-control"
+                       autocomplete="new-password"
+                       aria-required="true"
+                       placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                <!-- Password strength -->
+                <div class="password-meter" id="passwordMeter">
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Input.ConfirmPassword"
+                       class="form-control"
+                       autocomplete="new-password"
+                       aria-required="true"
+                       placeholder="Confirm password" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <button id="registerSubmit"
+                    type="submit"
+                    class="btn btn-brand">
+                Register
+            </button>
+        </form>
+
+        @* External providers (clean, no tutorial text) *@
+        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+        {
+            <hr />
+
+            <form asp-page="./ExternalLogin"
+                  asp-route-returnUrl="@Model.ReturnUrl"
+                  method="post">
+                @foreach (var provider in Model.ExternalLogins!)
+                {
+                    <button type="submit"
+                            class="btn btn-outline"
+                            name="provider"
+                            value="@provider.Name">
+                        Continue with @provider.DisplayName
+                    </button>
+                }
+            </form>
+        }
+
+        <div class="auth-links">
+            <a asp-page="./Login">Already have an account? Log in</a>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const input = document.getElementById("passwordInput");
+        const meter = document.getElementById("passwordMeter");
+
+        if (input && meter) {
+            input.addEventListener("input", () => {
+                const v = input.value;
+                meter.className = "password-meter";
+
+                if (v.length >= 10 && /[A-Z]/.test(v) && /\d/.test(v)) {
+                    meter.classList.add("password-strong");
+                } else if (v.length >= 6) {
+                    meter.classList.add("password-medium");
+                } else {
+                    meter.classList.add("password-weak");
+                }
+            });
+        }
+    </script>
+}

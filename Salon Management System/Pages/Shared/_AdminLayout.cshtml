@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body class="admin-layout">
+
+    <div class="app">
+
+        <aside class="sidebar">
+            <h2>Admin</h2>
+
+            <a asp-page="/Admin/Index">Dashboard</a>
+            <a asp-page="/Admin/Services/Index">Services</a>
+            <a asp-page="/Admin/Barbers/Index">Barbers</a>
+            <a asp-page="/Admin/Bookings/Index">Bookings</a>
+
+            <a asp-page="/Index" class="btn btn-outline">← Back to Site</a>
+        </aside>
+
+        <main class="main">
+            @RenderBody()
+        </main>
+
+    </div>
+
+</body>
+</html>

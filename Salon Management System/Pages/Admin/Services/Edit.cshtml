@@ -1,49 +1,101 @@
 ﻿@page
 @model Salon_Management_System.Pages.Admin.Services.EditModel
+@{
+    Layout = "_AdminLayout";
+}
 
 @{
     ViewData["Title"] = "Edit Service";
 }
 
-<h1>Edit Service</h1>
+<div class="container py-4">
 
-<form method="post">
-    <input type="hidden" asp-for="Service.Id" />
+    <h1 class="mb-4 fw-bold">Edit Service</h1>
 
-    <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input asp-for="Service.Name" class="form-control" required />
-    </div>
+    <form method="post" enctype="multipart/form-data" class="card shadow-sm border-0 p-4">
 
-    <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select asp-for="Service.Category" class="form-select" required>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-        </select>
-    </div>
+        <input type="hidden" asp-for="Service.Id" />
 
-    <div class="mb-3">
-        <label class="form-label">Duration (minutes)</label>
-        <input asp-for="Service.DurationMinutes" type="number"
-               class="form-control" required />
-    </div>
+        <!-- SERVICE IMAGE PREVIEW -->
+        @if (!string.IsNullOrEmpty(Model.Service.ImagePath))
+        {
+            <div class="mb-4 text-center">
+                <img src="@Model.Service.ImagePath"
+                     class="img-thumbnail shadow-sm"
+                     style="max-height:220px; border-radius:12px;" />
+            </div>
+        }
 
-    <div class="mb-3">
-        <label class="form-label">Price (R)</label>
-        <input asp-for="Service.Price" type="number" step="0.01"
-               class="form-control" required />
-    </div>
+        <!-- CHANGE IMAGE -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Change Image</label>
+            <input type="file"
+                   name="ImageFile"
+                   class="form-control"
+                   accept="image/*" />
+            <small class="text-muted">
+                Leave empty to keep existing image
+            </small>
+        </div>
 
-    <div class="form-check mb-3">
-        <input asp-for="Service.IsActive" class="form-check-input" />
-        <label class="form-check-label">Active</label>
-    </div>
+        <!-- NAME -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Name</label>
+            <input asp-for="Service.Name"
+                   class="form-control"
+                   required />
+        </div>
 
-    <button type="submit" class="btn btn-success">
-        Update
-    </button>
-    <a asp-page="Index" class="btn btn-secondary">
-        Cancel
-    </a>
-</form>
+        <!-- CATEGORY -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Category</label>
+            <select asp-for="Service.Category"
+                    class="form-select"
+                    required>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+            </select>
+        </div>
+
+        <!-- DURATION -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Duration (minutes)</label>
+            <input asp-for="Service.DurationMinutes"
+                   type="number"
+                   class="form-control"
+                   required />
+        </div>
+
+        <!-- PRICE -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Price (R)</label>
+            <input asp-for="Service.Price"
+                   type="number"
+                   step="0.01"
+                   class="form-control"
+                   required />
+        </div>
+
+        <!-- ACTIVE -->
+        <div class="form-check mb-4">
+            <input asp-for="Service.IsActive"
+                   class="form-check-input" />
+            <label class="form-check-label fw-semibold">
+                Active
+            </label>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success px-4">
+                💾 Save Changes
+            </button>
+
+            <a asp-page="Index" class="btn btn-outline-secondary px-4">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>

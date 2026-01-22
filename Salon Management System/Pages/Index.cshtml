@@ -4,14 +4,23 @@
     ViewData["Title"] = "Welcome";
 }
 
-<div class="welcome-hero">
-    <div class="welcome-overlay">
-        <h1 class="display-4 fw-bold">Welcome to Our Salon</h1>
-        <p class="lead">Explore styles. Book your look. Look your best.</p>
+<section class="landing">
+    <div class="landing-content">
+        <h1>Premium Grooming.<br />Made Simple.</h1>
 
-        <a asp-page="/Services/Index"
-           class="btn btn-lg btn-primary mt-3">
-            Explore Services
-        </a>
+        <p>
+            Book professional salon services in minutes.
+            Designed for comfort, precision, and style.
+        </p>
+
+        <div class="landing-actions">
+            <a asp-page="/Services/Index" class="btn btn-brand">
+                Explore Services
+            </a>
+
+            <a asp-page="/Bookings/MyBookings" class="btn btn-outline">
+                My Bookings
+            </a>
+        </div>
     </div>
-</div>
+</section>

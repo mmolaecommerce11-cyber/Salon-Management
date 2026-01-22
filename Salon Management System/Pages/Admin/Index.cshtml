@@ -1,132 +1,38 @@
 ﻿@page
 @model Salon_Management_System.Pages.Admin.IndexModel
-
 @{
-    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_AdminLayout";
 }
 
-<div class="container-fluid px-4">
+<h1>Admin Dashboard</h1>
+<p class="text-muted">System overview and management</p>
 
-    <!-- PAGE HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h2 class="fw-bold mb-0">Admin Dashboard</h2>
-            <small class="text-muted">System overview and management</small>
-        </div>
+<div class="grid grid-4">
+
+    <div class="card">
+        <h3>Total Bookings</h3>
+        <strong>@Model.TotalBookings</strong>
     </div>
 
-    <!-- STAT CARDS -->
-    <div class="row g-4 mb-5">
-
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="me-3 text-primary fs-2">
-                        <i class="bi bi-calendar-check"></i>
-                    </div>
-                    <div>
-                        <div class="text-muted small">Total Bookings</div>
-                        <div class="fs-3 fw-bold">@Model.TotalBookings</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="me-3 text-warning fs-2">
-                        <i class="bi bi-cash-stack"></i>
-                    </div>
-                    <div>
-                        <div class="text-muted small">Pending Payments</div>
-                        <div class="fs-3 fw-bold">@Model.PendingPayments</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="me-3 text-success fs-2">
-                        <i class="bi bi-scissors"></i>
-                    </div>
-                    <div>
-                        <div class="text-muted small">Active Services</div>
-                        <div class="fs-3 fw-bold">@Model.ActiveServices</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body d-flex align-items-center">
-                    <div class="me-3 text-dark fs-2">
-                        <i class="bi bi-people"></i>
-                    </div>
-                    <div>
-                        <div class="text-muted small">Active Barbers</div>
-                        <div class="fs-3 fw-bold">@Model.ActiveBarbers</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="card">
+        <h3>Pending Payments</h3>
+        <strong>@Model.PendingPayments</strong>
     </div>
 
-    <!-- MANAGEMENT SECTION -->
-    <div class="row g-4">
+    <div class="card">
+        <h3>Active Services</h3>
+        <strong>@Model.ActiveServices</strong>
+        <a asp-page="/Admin/Services/Index" class="btn btn-brand">
+            Manage Services
+        </a>
+    </div>
 
-        <div class="col-xl-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="fw-semibold mb-3">
-                        <i class="bi bi-scissors me-2"></i>Services
-                    </h5>
-                    <p class="text-muted small">
-                        Create, update, and manage salon services offered to customers.
-                    </p>
-                    <a asp-page="/Admin/Services/Index" class="btn btn-outline-primary w-100">
-                        Manage Services
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="fw-semibold mb-3">
-                        <i class="bi bi-person-badge me-2"></i>Barbers
-                    </h5>
-                    <p class="text-muted small">
-                        Control barber profiles, availability, and assignments.
-                    </p>
-                    <a asp-page="/Admin/Barbers/Index" class="btn btn-outline-primary w-100">
-                        Manage Barbers
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="fw-semibold mb-3">
-                        <i class="bi bi-journal-text me-2"></i>Bookings
-                    </h5>
-                    <p class="text-muted small">
-                        Review, approve, and manage customer appointments.
-                    </p>
-                    <a asp-page="/Admin/Bookings/Index" class="btn btn-outline-primary w-100">
-                        Manage Bookings
-                    </a>
-                </div>
-            </div>
-        </div>
-
+    <div class="card">
+        <h3>Active Barbers</h3>
+        <strong>@Model.ActiveBarbers</strong>
+        <a asp-page="/Admin/Barbers/Index" class="btn btn-brand">
+            Manage Barbers
+        </a>
     </div>
 
 </div>
