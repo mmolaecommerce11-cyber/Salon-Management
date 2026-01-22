@@ -85,5 +85,21 @@
     </div>
     @await RenderSectionAsync("Scripts", required: false)
 
+    <script>
+        (function () {
+            const storedTheme = localStorage.getItem("theme");
+            const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            const theme = storedTheme
+                ? storedTheme
+                : systemDark
+                    ? "dark"
+                    : "light";
+
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
+
+
 </body>
 </html>
