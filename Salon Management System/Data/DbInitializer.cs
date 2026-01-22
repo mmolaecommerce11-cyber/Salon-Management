@@ -1,38 +1,42 @@
-﻿using Salon_Management_System.Models;
-
-namespace Salon_Management_System.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using Salon_Management_System.Data;
 
 public static class DbInitializer
 {
-    public static void Seed(ApplicationDbContext context)
+    public static async Task SeedAsync(IServiceProvider serviceProvider)
     {
-        if (context.SalonServices.Any())
-            return;
+        // Get required services
+        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-        context.SalonServices.AddRange(
-            new SalonService
+        // 1. Create Admin role if it does not exist
+        if (!await roleManager.RoleExistsAsync("Admin"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+        }
+
+        // 2. Create Admin user if it does not exist
+        string adminEmail = "admin@admin.com";
+        string adminPassword = "Admin123!";
+
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+        if (adminUser == null)
+        {
+            adminUser = new IdentityUser
             {
-                Name = "Basic Haircut",
-                Category = "Men",
-                Price = 120,
-                DurationMinutes = 30,
-                IsActive = true
-            },
-            new SalonService
-            {
-                Name = "Fade Haircut",
-                Category = "Men",
-                Price = 150,
-                DurationMinutes = 40,
-                IsActive = true
-            }
-        );
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
 
-        context.Barbers.AddRange(
-            new Barber { FullName = "John Mokoena", IsActive = true },
-            new Barber { FullName = "Thabo Nkosi", IsActive = true }
-        );
+            await userManager.CreateAsync(adminUser, adminPassword);
+        }
 
-        context.SaveChanges();
+        // 3. Assign Admin role to Admin user
+        if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
     }
 }
