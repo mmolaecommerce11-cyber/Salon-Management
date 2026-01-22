@@ -1,4 +1,53 @@
 ﻿@page
-@model Salon_Management_System.Pages.Account.SettingsModel
+@model YourAppNamespace.Pages.Account.SettingsModel
+
 @{
+    ViewData["Title"] = "Settings";
 }
+
+<div class="main">
+    <div class="card" style="max-width:480px">
+
+        <h2>Appearance</h2>
+        <p class="text-muted">Customize how the app looks for you.</p>
+
+        <hr />
+
+        <div class="form-group">
+            <label for="themeSelect"><strong>Theme</strong></label>
+
+            <select id="themeSelect" class="form-control">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="system">System default</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const select = document.getElementById("themeSelect");
+
+    const savedTheme = localStorage.getItem("theme") || "system";
+    select.value = savedTheme;
+
+    select.addEventListener("change", () => {
+        const value = select.value;
+
+        if (value === "system") {
+            localStorage.removeItem("theme");
+
+            const prefersDark =
+                window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            document.documentElement.setAttribute(
+                "data-theme",
+                prefersDark ? "dark" : "light"
+            );
+        } else {
+            localStorage.setItem("theme", value);
+            document.documentElement.setAttribute("data-theme", value);
+        }
+    });
+</script>

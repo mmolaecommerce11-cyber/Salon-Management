@@ -36,6 +36,13 @@
                     <a asp-page="/Admin/Services/Index">Manage Services</a>
                     <a asp-page="/Admin/Barbers/Index">Manage Barbers</a>
                     <a asp-page="/Admin/Bookings/Index">Manage Bookings</a>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a asp-page="/Account/Settings" title="Settings">⚙ Settings</a>
+                    }
+
+                    <b></b>
+
                 }
             </nav>
 

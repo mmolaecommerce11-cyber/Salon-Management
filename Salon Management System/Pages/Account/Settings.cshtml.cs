@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Salon_Management_System.Pages.Account
+namespace YourAppNamespace.Pages.Account
 {
+    [Authorize]
     public class SettingsModel : PageModel
     {
         public void OnGet()
