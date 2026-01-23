@@ -4,13 +4,21 @@
 @{
     ViewData["Title"] = "Services";
 }
+<!-- Banner -->
+<section class="services-banner">
+    <div class="services-banner-overlay"></div>
+    <div class="services-banner-content">
+        <h1>Our Services</h1>
+        <p>Premium grooming & styling, tailored just for you</p>
+    </div>
+</section>
 
 <div class="container py-5">
 
     <!-- Header -->
     <div class="mb-5 text-center">
         <h1 class="fw-bold display-6">Our Services</h1>
-        <p class="text-muted mt-2">
+        <p class="text-muted mt-2 mx-auto" style="max-width:520px">
             Discover premium salon services tailored for you.
         </p>
     </div>
@@ -35,6 +43,8 @@
                         <option value="">All Categories</option>
                         <option value="Men" selected="@(Model.Category == "Men")">Men</option>
                         <option value="Women" selected="@(Model.Category == "Women")">Women</option>
+                        <option value="Boys" selected="@(Model.Category == "Boys")">Boys</option>
+                        <option value="Girls" selected="@(Model.Category == "Girls")">Girls</option>
                     </select>
                 </div>
 
@@ -60,21 +70,24 @@
     }
     else
     {
-        <div class="row g-4">
-            @foreach (var service in Model.Services.Where(s => s.IsActive))
+        <div class="d-flex flex-column gap-4">
+
+            @foreach (var service in Model.Services)
             {
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm service-card">
+                <div class="card border-0 shadow-sm service-card">
 
-                        <!-- Image -->
+                    <div class="d-flex flex-column flex-md-row">
+
+                        <!-- IMAGE -->
                         <img src="@(string.IsNullOrEmpty(service.ImagePath)
-                                                         ? "/images/placeholder-service.jpg"
-                                                         : service.ImagePath)"
-                     class="card-img-top"
-                     style="height:220px; object-fit:cover;"
-                     alt="@service.Name" />
+                                                                      ? "/images/placeholder-service.jpg"
+                                                                      : service.ImagePath)"
+                     alt="@service.Name"
+                     style="width:100%; max-width:260px; height:180px; object-fit:cover;"
+                     class="rounded-start" />
 
-                        <div class="card-body d-flex flex-column">
+                        <!-- CONTENT -->
+                        <div class="card-body d-flex flex-column flex-grow-1">
 
                             <div class="mb-2">
                                 <span class="badge bg-secondary-subtle text-dark">
@@ -82,39 +95,32 @@
                                 </span>
                             </div>
 
-                            <h5 class="fw-bold">@service.Name</h5>
+                            <h5 class="fw-bold mb-1">@service.Name</h5>
 
-                            <p class="text-muted mb-3">
+                            <p class="text-muted mb-2">
                                 Duration: <strong>@service.DurationMinutes min</strong>
                             </p>
 
                             <div class="mt-auto d-flex justify-content-between align-items-center">
+
                                 <span class="fs-5 fw-bold text-primary">
                                     R @service.Price.ToString("0.00")
                                 </span>
 
-                                <a class="btn btn-success"
-                                   asp-page="/Bookings/Create"
-                                   asp-route-serviceId="@service.Id">
+                                <a asp-page="/Bookings/Create"
+                                   asp-route-serviceId="@service.Id"
+                                   class="btn btn-success">
                                     Book Now
                                 </a>
                             </div>
 
                         </div>
+
                     </div>
+
                 </div>
                 }
+
         </div>
     }
 </div>
-
-<style>
-    .service-card {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-        }
-</style>

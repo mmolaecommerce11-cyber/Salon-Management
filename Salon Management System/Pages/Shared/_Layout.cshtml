@@ -32,7 +32,7 @@
                 {
                     <a asp-page="/Account/Settings" title="Settings">⚙ Settings</a>
                 }
-                <a asp-page="Privacy">Privacy</a>
+                <a asp-page="/Privacy">Privacy</a>
                 <b></b>
 
                 @if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
@@ -40,7 +40,7 @@
                     <div class="sidebar-section">Admin</div>
                     <a asp-page="/Admin/Index">Dashboard</a>
 
-                    <br></br>
+                    <br>
 
                 }
             </nav>

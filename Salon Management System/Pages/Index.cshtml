@@ -4,23 +4,125 @@
     ViewData["Title"] = "Welcome";
 }
 
-<section class="landing">
-    <div class="landing-content">
-        <h1>Premium Grooming.<br />Made Simple.</h1>
+<div class="landing-page index-page">
 
-        <p>
-            Book professional salon services in minutes.
-            Designed for comfort, precision, and style.
-        </p>
+    <!-- ================= HERO ================= -->
+    <section class="landing-hero">
+        <div class="container">
+            <h1>Premium Grooming<br />For Modern Professionals</h1>
 
-        <div class="landing-actions">
+            <p class="lead">
+                Book trusted salon services in minutes.
+                Professional barbers. Clean environment. Precise results.
+            </p>
+
+            <div class="hero-actions">
+                <a asp-page="/Services/Index" class="btn btn-brand">
+                    Book an Appointment
+                </a>
+
+                <a asp-page="/Bookings/MyBookings" class="btn btn-outline">
+                    My Bookings
+                </a>
+            </div>
+
+            <div class="trust-line">
+                <span>✓ Secure online booking</span>
+                <span>✓ Professional barbers</span>
+                <span>✓ Trusted by local clients</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <h5>Choose a Service</h5>
+                    <p>Select from our professional grooming services.</p>
+                </div>
+
+                <div class="step">
+                    <h5>Pick a Barber & Time</h5>
+                    <p>Choose your preferred barber and available slot.</p>
+                </div>
+
+                <div class="step">
+                    <h5>Book & Relax</h5>
+                    <p>Confirm your booking and show up stress-free.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES PREVIEW ================= -->
+    <section class="services-preview">
+        <div class="container">
+            <h2>Our Services</h2>
+
+            <div class="service-cards">
+                <div class="service-card">
+                    <h5>Haircut</h5>
+                    <p>Precision cuts tailored to your style.</p>
+                </div>
+
+                <div class="service-card">
+                    <h5>Beard Trim</h5>
+                    <p>Clean, sharp beard shaping.</p>
+                </div>
+
+                <div class="service-card">
+                    <h5>Full Grooming</h5>
+                    <p>A complete premium grooming experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WHY CHOOSE US ================= -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2>Why Choose Us</h2>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <h5>Quality</h5>
+                    <p>Consistent, high-quality results.</p>
+                </div>
+
+                <div class="benefit">
+                    <h5>Convenience</h5>
+                    <p>Fast, simple online booking.</p>
+                </div>
+
+                <div class="benefit">
+                    <h5>Professionals</h5>
+                    <p>Experienced, vetted barbers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Look Your Best?</h2>
+            <p>Book your appointment now and experience premium grooming.</p>
+
             <a asp-page="/Services/Index" class="btn btn-brand">
-                Explore Services
-            </a>
-
-            <a asp-page="/Bookings/MyBookings" class="btn btn-outline">
-                My Bookings
+                Book Now
             </a>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container footer-bottom">
+            © @DateTime.Now.Year The Salon — Professional Grooming
+        </div>
+    </footer>
+
+</div>
