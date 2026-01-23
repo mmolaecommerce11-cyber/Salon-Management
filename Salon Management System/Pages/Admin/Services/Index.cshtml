@@ -1,26 +1,72 @@
 ﻿@page
-@model Salon_Management_System.Pages.Services.IndexModel
+@model Salon_Management_System.Pages.Admin.Services.IndexModel
+@{
+    Layout = "_AdminLayout";
+}
 
+<h1 class="mb-3">Manage Services</h1>
+<p class="text-muted mb-4">Create, edit, activate or deactivate salon services</p>
 
-<h1>Services</h1>
-<p class="text-muted">Premium grooming & styling</p>
+<a asp-page="Create" class="btn btn-success mb-4">
+    + Add New Service
+</a>
 
-<div class="grid grid-4">
+<table class="table table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
 
-    @foreach (var service in Model.Services)
-    {
-        <div class="card">
-            <h3>@service.Name</h3>
-            <p>@service.DurationMinutes min</p>
+    <tbody>
+        @foreach (var service in Model.Services)
+        {
+            <tr>
+                <td style="width:90px">
+                    <img src="@(service.ImagePath ?? "/images/placeholder-service.jpg")"
+                         class="rounded"
+                         style="width:70px;height:60px;object-fit:cover;" />
+                </td>
 
-            <strong>R @service.Price</strong>
+                <td class="fw-semibold">@service.Name</td>
+                <td>@service.Category</td>
+                <td>@service.DurationMinutes min</td>
+                <td>R @service.Price.ToString("0.00")</td>
 
-            <a class="btn btn-brand"
-               asp-page="/Bookings/Create"
-               asp-route-serviceId="@service.Id">
-                Book Now
-            </a>
-        </div>
-    }
+                <td>
+                    @if (service.IsActive)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Inactive</span>
+                    }
+                </td>
 
-</div>
+                <td class="text-end">
+                    <a asp-page="Edit" asp-route-id="@service.Id"
+                       class="btn btn-sm btn-primary">
+                        Edit
+                    </a>
+
+                    <a asp-page="ToggleStatus" asp-route-id="@service.Id"
+                       class="btn btn-sm btn-warning">
+                        @(service.IsActive ? "Deactivate" : "Activate")
+                    </a>
+
+                    <a asp-page="Delete" asp-route-id="@service.Id"
+                       class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

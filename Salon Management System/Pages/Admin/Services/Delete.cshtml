@@ -1,0 +1,41 @@
+﻿@page "{id:int}"
+@model Salon_Management_System.Pages.Admin.Services.DeleteModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-danger">Delete Service</h1>
+
+<p class="mb-4">
+    Are you sure you want to permanently delete this service?
+</p>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h4 class="fw-bold">@Model.Service.Name</h4>
+
+        <p class="text-muted mb-1">
+            Category: <strong>@Model.Service.Category</strong>
+        </p>
+
+        <p class="text-muted mb-1">
+            Duration: <strong>@Model.Service.DurationMinutes min</strong>
+        </p>
+
+        <p class="text-muted mb-0">
+            Price: <strong>R @Model.Service.Price.ToString("0.00")</strong>
+        </p>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Service.Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Yes, Delete
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary ms-2">
+        Cancel
+    </a>
+</form>

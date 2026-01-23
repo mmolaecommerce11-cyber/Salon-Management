@@ -28,20 +28,19 @@
                 <a asp-page="/Index">Home</a>
                 <a asp-page="/Services/Index">Services</a>
                 <a asp-page="/Bookings/MyBookings">My Bookings</a>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-page="/Account/Settings" title="Settings">⚙ Settings</a>
+                }
+                <a asp-page="Privacy">Privacy</a>
+                <b></b>
 
                 @if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
                 {
                     <div class="sidebar-section">Admin</div>
                     <a asp-page="/Admin/Index">Dashboard</a>
-                    <a asp-page="/Admin/Services/Index">Manage Services</a>
-                    <a asp-page="/Admin/Barbers/Index">Manage Barbers</a>
-                    <a asp-page="/Admin/Bookings/Index">Manage Bookings</a>
-                    @if (User.Identity?.IsAuthenticated == true)
-                    {
-                        <a asp-page="/Account/Settings" title="Settings">⚙ Settings</a>
-                    }
 
-                    <b></b>
+                    <br></br>
 
                 }
             </nav>
